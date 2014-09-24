@@ -24,9 +24,31 @@ y /= 1000.  # conversion en kPa
 #print(len(y))
 
 
+mean = np.mean(y)
+std = np.std(y)
+
+ymean = np.ones(n)*mean
+yp = np.ones(n)*(mean+std)
+ym = np.ones(n)*(mean-std)
+
 plt.plot(x,y)
+plt.plot(x,ymean)
+plt.plot(x,yp)
+plt.plot(x,ym)
+
+
 
 plt.ylabel('pression [kPa]')
 plt.xlabel('temps [heures]')
+
+plt.show()
+
+
+
+plt.hist(y, 50, normed=1, facecolor='r')
+plt.xlabel('velocity')
+plt.ylabel('Probabilite')
+plt.title('Histogramme')
+#plt.axis([40, 160, 0, 0.03])
 
 plt.show()
