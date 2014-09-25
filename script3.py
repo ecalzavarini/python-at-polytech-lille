@@ -23,7 +23,6 @@ for i in range(0,len(data)) :
 
     print(data[i]) 
 
-
     sum += data[i]
 
 print("The average velocity is %f" % (sum/len(data))+" Km/h")    

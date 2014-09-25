@@ -44,9 +44,19 @@ plt.xlabel('temps [heures]')
 plt.show()
 
 
+# Histogramme
+ps = 24000. 
+rho = 0.91875
 
-plt.hist(y, 50, normed=1, facecolor='r')
-plt.xlabel('velocity')
+for i in range(0,len(data)) :
+
+    data[i] = sqrt( (float(data[i]) - ps)/rho )
+
+    data[i] *= 3600./1000.
+
+
+plt.hist(data, 50, normed=1, facecolor='r')
+plt.xlabel('vitesse (Km/h)')
 plt.ylabel('Probabilite')
 plt.title('Histogramme')
 #plt.axis([40, 160, 0, 0.03])
