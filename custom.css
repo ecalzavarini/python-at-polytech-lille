@@ -35,7 +35,7 @@
     div.text_cell_render{
         font-family: 'Alegreya Sans',Computer Modern, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
         line-height: 135%;
-        font-size: 120%;
+        font-size: 130%;
         width:600px;
         margin-left:auto;
         margin-right:auto;
@@ -50,7 +50,7 @@
     .text_cell_render h1 {
         font-weight: 200;
         font-size: 40pt;
-		   line-height: 100%;
+        line-height: 100%;
         color:#CD2305;
         margin-bottom: 0.5em;
         margin-top: 0.5em;
@@ -67,7 +67,7 @@
     }
     .text_cell_render h6 {
         font-weight: 400;
-        font-size: 13pt;
+        font-size: 15pt;
         color: #00b35a;
         font-style: normal;
         margin-bottom: .1em;
