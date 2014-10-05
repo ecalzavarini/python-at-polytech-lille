@@ -18,11 +18,9 @@ x=np.linspace(0,n,n)
 x /= 3600. # conversion en heures
 #print(len(x))
 
-
 y=np.asarray(data, dtype=float)   # convert a list into np array  see http://docs.scipy.org/doc/numpy/reference/generated/numpy.asarray.html
 y /= 1000.  # conversion en kPa
 #print(len(y))
-
 
 mean = np.mean(y)
 std = np.std(y)
@@ -31,12 +29,11 @@ ymean = np.ones(n)*mean
 yp = np.ones(n)*(mean+std)
 ym = np.ones(n)*(mean-std)
 
+
 plt.plot(x,y)
 plt.plot(x,ymean)
 plt.plot(x,yp)
 plt.plot(x,ym)
-
-
 
 plt.ylabel('pression [kPa]')
 plt.xlabel('temps [heures]')
