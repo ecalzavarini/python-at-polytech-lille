@@ -223,7 +223,7 @@
 
     
 
-    \subparagraph{TP 2 -- Informatique CM3 -- Septembre 2014}
+    \subparagraph{TP 2 -- Informatique CM3 -- Octobre 2014}
 
 
 
@@ -233,6 +233,23 @@
     Le texte de cette sessions de travaux pratiques est également disponible
 ici
 http://nbviewer.ipython.org/github/ecalzavarini/python-at-polytech-lille/blob/master/Python-TP2-2014.ipynb
+
+    Nous vous rappelons que les modalités pour accomplir ce TP sont les
+mêmes de la premeire séance :
+
+Vous aurez à écrire plusieurs scripts (script1.py , script2.py
+,\ldots{}). Les scripts doivent être accompagnés par un par un document
+descriptif unique ( README.txt ). Dans ce fichier, vous devrez décrire
+le mode de fonctionnement des scripts et, si besoin, mettre vos
+commentaires. Merci d'y écrire aussi vos nomes et prenoms complets. Tous
+les fichiers doivent etre mis dans un dossier appelé TP1-nom1-nom2 et
+ensuite être compressés dans un fichier TP1-nom1-nom2.tgz . Enfin vous
+allez envoyer ce fichier par email à l'enseignant : soit Enrico
+(enrico.calzavarini@polytech-lille.fr) ou Stefano
+(stefano.berti@polytech-lille.fr).
+
+Vous avez une semaine de temps pour compléter le TP, c'est-à-dire que la
+date limite pour envoyer vos travaux c'est le jour avant le TP suivant.
 
 
     \subparagraph{Gestion des accents en Python}
@@ -263,14 +280,14 @@ etc .
 
 
     Vous savez déjà ce qui est une fonction mathématique d'une variable
-réelle Considérons par exemple la fonction f(x) suivante définie:
+réelle. Considérons par exemple la fonction f(x) suivante définie:
 
 f : x ---\textgreater{} 2 x + 1
 
 pour la définir en Python :
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZsh{}definition d\PYZsq{}une fonction}
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c}{\PYZsh{}definition d\PYZsq{}une fonction}
         \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
             \PY{k}{return} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{x} \PY{o}{+} \PY{l+m+mi}{1}
         
@@ -368,15 +385,15 @@ hello Dominique from Python!!!
 
     \subsubsection{Script 1 : calcul des forces sur un ballon de football}
 
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
-        \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kick.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-\texttt{\color{outcolor}Out[{\color{outcolor}9}]:}
+%
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+%        \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kick.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%\end{Verbatim}
+%\texttt{\color{outcolor}Out[{\color{outcolor}9}]:}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_20_0.jpeg}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_21_0.jpeg}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -391,14 +408,14 @@ force de traînée exercée par le frottement de l'air sur le ballon
 \[F_T = 0.5 \ C_D \ \rho \ u^2\ S \]
 
     Ou \(M\) est la masse du ballon, \(g\) l'accélération de gravité,
-\(C_D\) le coefficient de traînée, \(\rho\) la densité massique de
-l'air, \(u\) la vitesse du ballon et enfin \(S\) la section du ballon
+\(C_D\) le coefficient de traînée, \(\rho\) la masse volumique de l'air,
+\(u\) la vitesse du ballon et enfin \(S\) la section du ballon
 \(S=\pi\ R^2\) (avec R le rayon).
 
     Nous demandons d'écrire un script qui tout d'abord demande à
 l'utilisateur d'entrer les valeurs du rayon du ballon (en mètres), de la
-masse du ballon (en Kg) et de la vitesse du ballon ainsi que l'unité de
-mesure pour cette dernière (soit ``m/s'' ou ``Km/h''). Ensuite le script
+masse du ballon (en kg) et de la vitesse du ballon ainsi que l'unité de
+mesure pour cette dernière (soit ``m/s'' ou ``km/h''). Ensuite le script
 devra calculer les forces \(F_P\) et \(F_T\), afficher les deux valeurs
 ainsi que leur rapport \(F_T/F_P\).
 
@@ -407,7 +424,7 @@ ainsi que leur rapport \(F_T/F_P\).
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
 \item
-  une fonction qui convertit la vitesse de ``km/s'' en ``m/s'' si besoin
+  une fonction qui convertit la vitesse de ``km/h'' en ``m/s'' si besoin
 \item
   une fonction qui calcule la surface \(S\) du ballon à partir du rayon
   \(R\)
@@ -418,15 +435,15 @@ ainsi que leur rapport \(F_T/F_P\).
 \end{enumerate}
 
     Les données du problème sont l'accélération de gravité
-\(g=9.81 m /s^2\), \(\rho = 1.2 m\ kg/m^{-3}\), C D = 0.2.
-
+\(g=9.81 \, m /s^2\), la masse volumique de l'air
+\(\rho = 1.2 \, kg/m^{-3}\), le coefficient de trainée \(C_D=0.2\).
 Tourner le script plusieurs fois et dire ce qui change dans le rapport
-F\_T/F\_P pour des valuers de vitesse croissante et à masse et rayon
-fixes.
+\(F_T/F_P\) pour des valuers de vitesse croissante (p.ex.
+\(u=10 \, km/h\), \(u=120 \, km/h\)) et à masse et rayon fixes.
 
 
-    \paragraph{Script 2 : etude de la fonction de transfert du système ressort -
-amortisseur d'un automobile}
+    \subsubsection{Script 2 : étude de la fonction de transfert du système ressort -
+amortisseur (suspension) d'un automobile}
 
 
     L'objet de ce script est d'illustrer à l'aide de Python les rôles
@@ -436,14 +453,14 @@ amortisseur en parallèle.
 
 Comme dans la figure ci-dessous:
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
-         \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{masse\PYZhy{}ressort\PYZhy{}amortisseur.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-\texttt{\color{outcolor}Out[{\color{outcolor}10}]:}
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+%         \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{masse\PYZhy{}ressort\PYZhy{}amortisseur.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%\end{Verbatim}
+%\texttt{\color{outcolor}Out[{\color{outcolor}10}]:}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_29_0.jpeg}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_30_0.jpeg}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -453,19 +470,22 @@ Comme dans la figure ci-dessous:
 \[ \ddot{x} + \frac{\omega_0}{Q} \dot{x} + \omega_0^2\ x = \frac{F}{m} \cos( \omega t) \]
 
     Ici \(m\) est la masse de la roue, \(F\) et \(\omega\) sont
-respectivement l'intensité de la force appliquée et sa pulsation,
-\(\omega_0\) la fréquence caractéristique du ressort et enfin le
-coefficient \(Q\) (dit coefficient de qualité).
+respectivement l'intensité de la force appliquée (qui modélise l'effet
+des ondulations du sol sur la roue) et sa pulsation , \(\omega_0\) la
+pulsation caractéristique du ressort (\(\omega_0=\sqrt{k/m}\)) et enfin
+le coefficient \(Q\) (dit coefficient de qualité). Ici on négligera le
+poids de la roue.
 
-Un système très amorti a un Q faible. À l'inverse, un Q élevé correspond
-à un système peu amorti. Pour fixer les idées, le Q d'une voiture avec
-des amortisseurs en bon état est légèrement supérieur à 1.
+Un système très amorti a un \(Q\) faible. À l'inverse, un \(Q\) élevé
+correspond à un système peu amorti. Pour fixer les idées, le \(Q\) d'une
+voiture avec des amortisseurs en bon état est légèrement supérieur à 1.
 
     De la solution de l'equation du système ressort-amortisseur on trouve la
-fonction de transfert qui décrit la réponse du systeme en fonction de la
+fonction de transfert qui décrit la réponse du système en fonction de la
 pulsation \(\omega\).
 
-En particulier la fonction de transfert s'écrit :
+En particulier la fonction de transfert (le module de cette fonction
+pour la précision) s'écrit :
 
     \[ T(\omega) = \frac{F}{m \ \omega_0^2} \frac{1}{\sqrt{ \left( 1 - \omega^2/\omega_0^2 \right)^2 +  Q^{-2} \ \omega^2/\omega_0^2 }} \]
 
@@ -474,16 +494,20 @@ En particulier la fonction de transfert s'écrit :
     \[ T(u) = \frac{F}{m \ \omega_0^2} \frac{1}{\sqrt{ \left( 1 - u^2 \right)^2 +  u^{2}/ \      Q^2}} \]
 
     Nous demandons d'écrire un script qui trace un graphique du module de la
-fonction de transfert en fonction de la pulsation adimensionnée u pour
-toutes les valeurs de Q dans l'intervalle {[}0 , 10{]} avec un
-incrementation de \(\delta Q = 2.0\).
+fonction de transfert \(T(u)\) en fonction de la pulsation adimensionnée
+\(u\) (dans l'intervalle \([0,2]\)) pour toutes les valeurs de \(Q\)
+dans l'intervalle \([0,10]\) avec rapport entre une valeur de \(Q\) et
+la valeur précédente de \(\delta Q = 2.0\) (facteur de redoublement).
 
-    Prendre $ F / (m \omega_0^{2} ) = 2 $
+    Prendre la valeur suivante pour l'amplitude de la fonction de transfert
+\[ \frac{F}{m \omega_0^2} = 2 \]
 
-    Ça pourrait être utile :
+
+    \subparagraph{Ça pourrait être utile :}
 
 
-    \subsubsection{La boucle while}
+
+    \paragraph{La boucle while}
 
 
     Le but de la boucle ``while'' est de répéter certaines instructions tant
@@ -529,18 +553,57 @@ Zéro!
     \end{Verbatim}
 
 
-    \subsubsection{Script 3}
+    \paragraph{Création d'une légende sur un graphique}
 
 
-    Écrire un script qui calcule la valeur critique de Q, c'est-à-dire la
-valuer intermédiaire entre le régime des vibrations sur amorties et cel
-de résonance.
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:}    
+         \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{o}{*}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{)}   \PY{c}{\PYZsh{} Création d\PYZsq{}une array numpy : Temps = Abscisses }
+         
+         \PY{k}{def} \PY{n+nf}{U}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{Q}\PY{o}{*}\PY{n}{t}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pi}\PY{o}{*}\PY{n}{t}\PY{p}{)}  \PY{c}{\PYZsh{} Fonction U dépendant d\PYZsq{}un paramètre Q}
+         
+         \PY{c}{\PYZsh{} Plot1 avec Q = 2 et édition du label correspondant}
+         \PY{n}{Q}\PY{o}{=}\PY{l+m+mf}{2.0}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{U}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Q=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Q}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{c}{\PYZsh{} Plot2 avec Q = 10 et édition du label correspondant}
+         \PY{n}{Q}\PY{o}{=}\PY{l+m+mf}{10.0}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{U}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Q=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Q}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper right}\PY{l+s}{\PYZsq{}}\PY{p}{)}        \PY{c}{\PYZsh{} Appel de la légende}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
 
-    Pour faire cela, on doit calculer la valeur maximale de T pour des
-valeurs décroissantes de Q, et d'arrêter lorsque T\_\{max\} est égal à F
-/ (m ω20).
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
 
-    Utiliser encore : F / (m ω20)=2.
+    \subsubsection{Script 3 : Calcul de la valeur critique du coefficient de qualité d'une
+suspension}
+
+
+    Écrire un script qui calcule la valeur critique de \(Q\), c'est-à-dire
+la valeur pour laquelle on observe une transition entre le régime de
+vibrations sur-amorties (\(T(u)\) non croissante) et celui de résonance
+(\(T(u)\) non monotone, avec un maximum pour \(0< u < 1\)).
+
+    Pour cela faire, on peut par exemple calculer la valeur maximale
+\(T_{max}\) de \(T(u)\) pour des valeurs croissantes de \(Q\), et
+arrêter le calcul lorsque \(T_{max}\) est supérieur à
+\(F / (m \omega_0^2)\).
+
+Dans ce cas on vous suggère de prendre \(Q=0.5\) comme valeur de départ
+et de l'incrémenter pas à pas d'une valeur \(\delta Q = 10^{-6}\).
+
+    Utiliser encore : \(F /(m \omega_0^2) = 2\)
 
 
     \paragraph{Calcul de la valeur maximale avec numpy}
@@ -550,30 +613,211 @@ valeurs décroissantes de Q, et d'arrêter lorsque T\_\{max\} est égal à F
 calculer le maximum d'une liste :
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}13}]:}  \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
-          
-          \PY{n}{val}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
-          
-          \PY{n}{val\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{val}\PY{p}{)}
-             
-          \PY{k}{print}\PY{p}{(}\PY{n}{val\PYZus{}max}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}3}]:}  \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{n}{val}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}
+         
+         \PY{n}{val\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{val}\PY{p}{)}
+            
+         \PY{k}{print}\PY{p}{(}\PY{n}{val\PYZus{}max}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-2.0
+7.0
+    \end{Verbatim}
+
+
+    \subsubsection{Script 4 : Préparation des données d'entrée pour une machine-outil à
+contrôle numérique}
+
+
+    Les machines-outil d'usinage à contrôle numérique peuvent être
+contrôlées à travers un fichier des donnes d'entrée. Ce fichier contient
+toutes les spécifications géométriques de l'objet à usiner et il a
+souvent la forme d'une matrice en deux dimensions, dans laquelle chaque
+élément identifie une coordonnée spatiale (x, y) alors que la valeur de
+l'élément contient l'information sur l'usinage (par exemple dans une
+fraiseuse ``\(0\)'' signifie couper et ``\(1\)'' signifie garder tel
+qu'il est).
+
+Nous considérons ici une machine-outil fraiseuse avec résolution du
+dixième de millimetre, et une surface de travail de
+\((10 \times 10) cm^2\). Nous voulons découper de la pièce brute une
+bielle à partir d'un bloc de métal de dimensions \((10 \times 10) cm^2\)
+(l'épaisseur du bloc n'a pas d' importance ici).
+
+La géométrie de la bielle est montrée dans la figure ci-dessous :
+
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}74}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+%         \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bielle.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+%\end{Verbatim}
+%\texttt{\color{outcolor}Out[{\color{outcolor}74}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_56_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Détails de la géométrie de la bielle:
+
+\begin{itemize}
+\item
+  le grand anneau a rayon interne \(r_1 = 10.0\ mm\), rayon externe
+  \(r_2 = 16.0\ mm\) , position du centre \(x_1 = 50.0 \ mm\) ,
+  \(y_1 = 20.0 \ mm\).
+\item
+  le petit anneau a rayon interne \(r_3 = 3.0\ mm\) , rayon externe
+  \(r_4 = 11.2\ mm\) , position du centre \(x_2 = 50.0 \ mm\) ,
+  \(y_2 = 75.0 \ mm\).
+\item
+  la barre de liaison a longueur \(l=300\ mm\) , hauteur \(h = 100\ mm\)
+  et centre géométrique en \(x_3 = 50.0 \ mm\), \(y_3 = 50.0 \ mm\).
+\end{itemize}
+
+    On demande d'écrire un script qui crée la matrice pour usiner la bielle
+en figure.
+
+Cette matrice devra avoir \(1000\) x \(1000\) éléments, chaque élément
+correspondant à \((0.1 \times 0.1) mm^2\), et la valeur des éléments
+doit être soit \(0\) si le matériau doit être enlevé (ou bien
+completement fraisé dans ce cas) et \(1\) s'il doit être gardé comme il
+est.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Montrer à travers un graphique la matrice que vous avez obtenu
+\item
+  Tracer aussi un graphique de la section longitudinale centrale de la
+  bielle.
+\end{enumerate}
+
+
+    \subparagraph{Cela pourrait vous être utile :}
+
+
+
+    \paragraph{Créer et manipuler un tableau multidimensionnel avec numpy}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        
+        \PY{c}{\PYZsh{}définition d\PYZsq{}une matrice avec numpy}
+        \PY{n}{tableau} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array} \PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{p}{,}\PY{l+m+mi}{1} \PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{44} \PY{p}{,}\PY{l+m+mi}{55} \PY{p}{,}\PY{l+m+mi}{56}\PY{p}{]}\PY{p}{]}\PY{p}{)} 
+        
+        \PY{k}{print}\PY{p}{(}\PY{n}{tableau}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0  1  2]
+ [ 1  2  3]
+ [ 4  6 12]
+ [44 55 56]]
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.core.display} \PY{k+kn}{import} \PY{n}{HTML}
-         \PY{k}{def} \PY{n+nf}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}\PY{p}{:}
-             \PY{n}{styles} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{custom.css}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
-             \PY{k}{return} \PY{n}{HTML}\PY{p}{(}\PY{n}{styles}\PY{p}{)}
-         \PY{n}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{n}\PY{o}{=}\PY{n}{tableau}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{c}{\PYZsh{} copier un element du tableau  ,  tableau[num. ligne][num. colonne]}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{n}\PY{p}{)} 
 \end{Verbatim}
 
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}14}]:} <IPython.core.display.HTML at 0x10c0844d0>
+    \begin{Verbatim}[commandchars=\\\{\}]
+44
+    \end{Verbatim}
+
+    Noter que l'indice de gauche indique toujours le nombre de la ligne
+tandis que l'indice de droite indique le numéro de la colonne.
+
+Ce système d'indexage (dite convention ``row-major order'' ou ``ligne
+par ligne'') n'est pas toujours intuitif : dans le cas d'une matrice
+\(A[i, j]\) qui contient des informations spatiales l'indice à gauche (
+\(i\) ) identifie la coordonnée verticale \(y\) et l'indice de droite (
+\(j\) ) identifie la coordonnée horizontale \(x\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{c}\PY{o}{=}\PY{n}{tableau}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{c}{\PYZsh{} copier une colonne du tableau}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
 \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0  1  4 44]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{d}\PY{o}{=}\PY{n}{tableau}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{c}{\PYZsh{} copier une colonne du tableau}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0 1]
+ [1 2]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{tableau} \PY{o}{=} \PY{n}{tableau} \PY{o}{+} \PY{l+m+mi}{2}  \PY{c}{\PYZsh{}ajouter 2 aux éléments du tableau}
+         \PY{k}{print}\PY{p}{(}\PY{n}{tableau}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 2  3  4]
+ [ 3  4  5]
+ [ 6  8 14]
+ [46 57 58]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{tableau2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}  \PY{c}{\PYZsh{}définition d\PYZsq{}une matrice composée de zéros}
+        
+        \PY{k}{print}\PY{p}{(}\PY{n}{tableau2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]]
+    \end{Verbatim}
+
+
+    \paragraph{Représenter graphiquement une matrice}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{n}{my\PYZus{}mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{}création d\PYZsq{}une matrice aléatoire de 80x50 elements}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{matshow}\PY{p}{(}\PY{n}{my\PYZus{}mat}\PY{p}{)} \PY{c}{\PYZsh{} représentation graphique}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} définition des marqueurs en x}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} définition des marqueurs en y}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}        
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2-2014_files/Python-TP2-2014_69_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.core.display} \PY{k+kn}{import} \PY{n}{HTML}
+%        \PY{k}{def} \PY{n+nf}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+%            \PY{n}{styles} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{custom.css}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+%            \PY{k}{return} \PY{n}{HTML}\PY{p}{(}\PY{n}{styles}\PY{p}{)}
+%        \PY{n}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}
+%\end{Verbatim}
+%
+%            \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{outcolor}Out[{\color{outcolor}1}]:} <IPython.core.display.HTML at 0x104bafad0>
+%\end{Verbatim}
         
 
     % Add a bibliography block to the postdoc
