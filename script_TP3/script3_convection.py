@@ -14,17 +14,23 @@ u[.5/dx : 1/dx+1]=2  #setting u = 2 between 0.5 and 1 as per our I.C.s
 print u
 
 plt.plot(np.linspace(0,2,nx), u)
-
 plt.show()
 
-un = np.ones(nx) #initialize a temporary array
+u0 = u.copy() # make a copy of the initial value 
+un = np.ones(nx) # initialize a temporary array
+
+def advection(u,c,dt,dx,nx):
+    un = u.copy()    # copy the existing values of u into un    
+    for i in range(1,nx):  #loop on all the indexes of u exept the first 
+        u[i] = un[i]-c*dt/dx*(un[i]-un[i-1])
+    return u    
 
 for n in range(nt):  # loop for values of n from 0 to nt, so it will run nt times
-    un = u.copy()    # copy the existing values of u into un
-    for i in range(1,nx): 
-        u[i] = un[i]-c*dt/dx*(un[i]-un[i-1])
+    u = advection(u,c,dt,dx,nx)
 
-plt.plot(np.linspace(0,2,nx),u)
 
+plt.plot(np.linspace(0,2,nx), u0 , label="t=0")
+plt.plot(np.linspace(0,2,nx),u, label="t=6.25")
+plt.legend()
 plt.show()
 
