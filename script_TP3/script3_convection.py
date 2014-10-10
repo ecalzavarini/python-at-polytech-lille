@@ -2,7 +2,7 @@ import numpy as np                 #here we load numpy, calling it 'np' from now
 import matplotlib.pyplot as plt    #here we load matplotlib, calling it 'plt'
 from math import *
 
-nx = 81  # try changing this number from 41 to 81 and Run All ... what happens?
+nx = 81  #  be careful 80 or 79 will not produce the same result. Why?
 dx = 2./(nx-1)
 nt = 25    #nt is the number of timesteps we want to calculate
 dt = .025  #dt is the amount of time each timestep covers (delta t)
