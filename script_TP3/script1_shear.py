@@ -8,14 +8,14 @@ s=0.12
 h=20
 
 
-# plot the shear flow
+# plot the shear field
 X,Y = np.meshgrid( np.arange(-h,h,1), np.arange(-h,h,1) )
 U = s*Y
 V = 0
 C =  ( U**2. + V**2. )**.5
 
 Q = plt.quiver( X, Y, U, V , C, scale = 10.)
-plt.title("linear shear flow")
+plt.title("linear shear field")
 plt.show()
 
 #build gradient matrix
@@ -38,7 +38,7 @@ UA = asy[0,1]*Y
 VA = asy[1,0]*X
 C =  ( UA**2. + VA**2. )**.5
 
-plt.title("pure rotation flow")
+plt.title("pure rotation field")
 Q = plt.quiver( X, Y, UA, VA , C, scale = 10.)
 plt.show()
 
@@ -47,7 +47,7 @@ US = sym[0,1]*Y
 VS = sym[1,0]*X
 C =  ( US**2. + VS**2. )**.5
 
-plt.title("pure strain flow")
+plt.title("pure strain field")
 Q = plt.quiver( X, Y, US, VS , C, scale = 10.)
 plt.show()
 
