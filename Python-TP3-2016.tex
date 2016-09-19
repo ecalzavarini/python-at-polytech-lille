@@ -1,0 +1,772 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font than Computer Modern for most use cases
+    \usepackage{palatino}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Python-TP3-2016}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    \date{} 
+    \maketitle
+    
+    
+
+    
+    \subparagraph{TP 3 -- Informatique CM3 --
+2016-2017}\label{tp-3-informatique-cm3-2016-2017}
+
+    \section{Python @ Polytech'Lille}\label{python-polytechlille}
+
+    Le texte de cette session de travaux pratiques est également disponible
+ici:
+
+http://nbviewer.ipython.org/github/ecalzavarini/python-at-polytech-lille/blob/master/Python-TP3-2016.ipynb
+
+    \subsubsection{Modalités pour accomplir le TP et compte
+rendu}\label{modalituxe9s-pour-accomplir-le-tp-et-compte-rendu}
+
+    Nous vous rappelons les modalités pour accomplir ce TP :
+
+Vous aurez à écrire plusieurs scripts (script1.py , script2.py ,
+\ldots{}). Les scripts doivent être accompagnés par un document
+descriptif unique (README.txt). Dans ce fichier, vous devrez décrire le
+mode de fonctionnement des scripts et, si besoin, mettre vos
+commentaires. Merci d'y écrire aussi vos noms et prenoms complets. Tous
+les fichiers doivent être mis dans un dossier appelé TP3-nom1-nom2 et
+ensuite être compressés dans un fichier archive TP3-nom1-nom2.tgz .
+
+Enfin vous allez envoyer ce fichier par email à l'enseignant: soit
+Enrico (enrico.calzavarini@polytech-lille.fr) soit Stefano
+(stefano.berti@polytech-lille.fr).
+
+    \paragraph{Vous avez une semaine de temps pour compléter le TP,
+c'est-à-dire que la date limite pour envoyer vos travaux c'est dans 7
+jours à partir
+d'aujourd'hui.}\label{vous-avez-une-semaine-de-temps-pour-compluxe9ter-le-tp-cest-uxe0-dire-que-la-date-limite-pour-envoyer-vos-travaux-cest-dans-7-jours-uxe0-partir-daujourdhui.}
+
+    \subsubsection{Tracer le graphique d'un champ vectoriel en deux
+dimensions}\label{tracer-le-graphique-dun-champ-vectoriel-en-deux-dimensions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pylab} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{o}{*}
+        
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pi}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pi}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} np.meshgrid, produit une matrices de coordonnées à partir de deux vecteurs. }
+        \PY{n}{X}\PY{p}{,}\PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)} \PY{c}{\PYZsh{} grille bidimensionnelle}
+        
+        \PY{c}{\PYZsh{}définition du champ vectoriel}
+        \PY{n}{U} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+        \PY{n}{V} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        
+        \PY{n}{C} \PY{o}{=}  \PY{p}{(} \PY{n}{U}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.} \PY{o}{+} \PY{n}{V}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{2.} \PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{o}{.}\PY{l+m+mi}{5} \PY{c}{\PYZsh{} calcul du module du vecteur}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)} \PY{p}{)}  \PY{c}{\PYZsh{} taille de la figure : 10 x 10 pouces}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{quiver}\PY{p}{(} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{U}\PY{p}{,} \PY{n}{V} \PY{p}{,} \PY{n}{C} \PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{l+m+mf}{20.}\PY{p}{)} \PY{c}{\PYZsh{}trace le graphyque du champ vectoriel}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pi}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP3-2016_files/Python-TP3-2016_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    À noter que dans ``plt.quiver( X, Y, U, V , C , scale = 20.)'' le
+paramètre ``scale'' règle la taille d'affichage des flèches selon le
+souhait de l'utilisateur. Une valeure de ``scale'' plus petite produit
+des flèches plus larges.
+
+    \subsection{Script 1 : Comprendre la déformation de type
+cisaillement}\label{script-1-comprendre-la-duxe9formation-de-type-cisaillement}
+
+    Écrire un script qui effectue les calculs et actions suivantes.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Il trace le graphique d'un champ de déformation de type cisaillement,
+  c'est-à-dire
+\end{enumerate}
+
+\[ {\bf u} = (u_x, u_y) = \left( \begin{array}{cc}
+\partial_x u_x  & \partial_y u_x \\
+\partial_x u_y  & \partial_y u_y \end{array} \right) 
+\left( \begin{array}{c}
+x   \\
+y  \end{array} \right)=  
+\left( \begin{array}{c}
+\gamma y   \\
+0  \end{array} \right)\]
+
+où \(\gamma = \partial_y u_x\) est le taux de déformation, ici supposée
+constant.
+
+Ici on utilisera les paramètres suivants: \[
+\gamma = 0.12; \, x,y \in [-h,h]; \, h = 20.
+\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  Il calcule la matrice gradient de déformation:
+  \[ \nabla u =  \left( \begin{array}{cc}
+  \partial_x u_x & \partial_y u_x  \\
+  \partial_x u_y & \partial_y u_y \end{array} \right). \]
+\item
+  Il décompose cette matrice dans sa partie symétrique (\(S\)) et dans
+  sa partie antisymétrique (\(A\)) :
+\end{enumerate}
+
+\[ S = \frac{1}{2}\left(\nabla u  + (\nabla u )^T \right) \]
+
+\[ A = \frac{1}{2}\left(\nabla u  - (\nabla u )^T \right). \]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\item
+  Il calcule le champ de déformation correspondant à \(S\) et \(A\),
+  appellés respectivement \(u_S\) et \(u_A\).
+\item
+  Il trace les graphiques de deux nouveaux champs de déformation,
+  \(u_S\) et \(u_A\).
+\item
+  Enfin, il trace le graphique de la somme de \(u_S\) et \(u_A\).
+\end{enumerate}
+
+Qu'apprenons-nous des ces quatre graphiques ?
+
+Dans les cours de mécanique des milieux continus, on entend souvent dire
+qu'une déformation de type cisaillement est équivalente à la somme d'une
+rotation (champ \(A\)) et d'un étirement, élongation et compression,
+(champ \(S\)). Avec ce script, vous montrerez d'une façon graphique que
+cette affirmation est bien vérifiée.
+
+    \subsubsection{Tranpsosition d'une matrice avec les arrays de
+\(numpy\)}\label{tranpsosition-dune-matrice-avec-les-arrays-de-numpy}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        
+        \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c}{\PYZsh{} a: matrice 2 x 2}
+        \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+        
+        \PY{n}{at}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{a}\PY{p}{)} \PY{c}{\PYZsh{} transposition de la matrice a}
+        \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{at = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{n}{at}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a = 
+[[1 2]
+ [3 4]]
+at = 
+[[1 3]
+ [2 4]]
+
+    \end{Verbatim}
+
+    \subsection{Script 2 : Transport du vecteur
+vitesse}\label{script-2-transport-du-vecteur-vitesse}
+
+    On veut écrire un script qui met en oeuvre une relation notable de la
+cinématique des solides rigides: la formule du transport du vecteur
+vitesse entre deux points \(A\) et \(B\) appartenants à un même solide
+\(S_1\) (en mouvement par rapport à un autre solide \(S_0\)):
+
+    \[\vec{\bf V}(B \in S_1/S_0) = \vec{\bf V}(A \in S_1/S_0) + \vec{\bf \Omega}_{S_1/S_0} \wedge \vec{\bf AB}\]
+
+    Plus précisément, le script devra demander à l'utilisateur les
+coordonnées des points \(A\) et \(B\), la vitesse en \(A\) ainsi que le
+vecteur rotation \(\vec{\bf \Omega}_{S_1/S_0}\) du solide \(S_1\) par
+rapport au solide \(S_0\). Il calculera le vectur vitesse en \(B\) et sa
+norme \(|\vec{\bf V}(B \in S_1/S_0)|\), où
+\(|\vec{\bf V}|=\sqrt{{\bf V}\cdot{\bf V}}\).
+
+    Il peut être ici utile de se rappeler de l'expression suivante du
+produit vectoriel entre les vecteurs
+\(\vec{\bf{\Omega}}=(\Omega_x,\Omega_y,\Omega_x)\) et
+\(\vec{AB}=(x,y,z)\):
+
+\[
+\vec{\bf{\Omega}} \wedge \vec{AB}=
+\left| \begin{array}{ccc}
+\vec{i} & \vec{j} & \vec{k}  \\
+\Omega_x & \Omega_y & \Omega_z \\
+x & y & z
+\end{array} \right| = 
+\vec{i} \left| \begin{array}{cc}
+\Omega_y & \Omega_z \\
+y & z
+\end{array}
+\right| - 
+\vec{j} \left| \begin{array}{cc}
+\Omega_x & \Omega_z \\
+x & z
+\end{array}
+\right| + 
+\vec{k} \left| \begin{array}{cc}
+\Omega_x & \Omega_y \\
+x & y
+\end{array}
+\right|,
+\]
+
+où les barres verticales indiquent des déterminants et \(\vec{i}\),
+\(\vec{j}\), \(\vec{k}\) les vecteurs unitaires de la base d'un système
+de coordonnées.
+
+    En utilisant des operations simples sur les éléments des arrays
+(vecteurs ou matrices), ainsi que des boucles \(for\), écrivez par
+vous-mêmes les deux fonctions qui effectuent le produit scalaire et le
+produit vectoriel de deux vecteurs, même si, comme vous pouvez
+l'imaginer, \(numpy\) possède déjà des fonctions pour cela faire, qui
+sont très pratiques à utiliser:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        
+        \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+        \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)} \PY{c}{\PYZsh{} produit scalaire}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 17
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{np}\PY{o}{.}\PY{n}{cross}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)} \PY{c}{\PYZsh{} produit vectoriel}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} array([ 7, -5,  1])
+\end{Verbatim}
+        
+    Vérifiez que votre script est correct en utilisant les fonctions
+ci-dessus.
+
+    Vue la nécessité de rentrer certaines données (les coordonnées des
+points et les composantes des vecteurs) plusieurs fois, il pourrait être
+pratique de définir aussi une fonction pour la lecture de ce type de
+données.
+
+    \subsection{Script 3 : Propagation d'une
+perturbation}\label{script-3-propagation-dune-perturbation}
+
+    L'équation de convection linéaire est une modèle mathématique simple
+décrivant la propagation d'un champ scalaire (tel qu'une perturbation,
+une vague, une vibration, ou bien un champ de concentration d'une
+substance chimique) dans un milieu à dissipation négligeable. Elle est
+utilisée dans une large gamme de domaines qui vont de la météorologie à
+l'océanographie, à la physique et l'ingénierie. Cette équation s'écrit:
+
+\[ \frac{\partial u}{\partial t} + c \frac{ \partial u}{\partial x} = 0\]
+
+Si la condition initiale (entendue comme la forme de la perturbation
+initiale) est \(u(x, t=0) = u_0 (x)\) , on peut montrer que la solution
+exacte de l'équation est \(u (x, t) = u_0 (x-ct)\), c'est-à-dire que la
+perturbation se propage sans changement de forme avec une vitesse \(c\).
+
+Pour la résoudre numériquement, nous pouvons discrétiser cette équation
+dans l'espace et dans le temps en utilisant le schéma de différences
+finies en avant pour la dérivée temporelle et le schéma de différences
+finies en arrière pour le dérivée par rapport à l'espace. Pensez à la
+discrétisation des coordonnées spatiales \(x\) en points désignés par un
+indice \(i\) qui varie de \(0\) à \(N\), et la disctérisation temporelle
+par intervalles de temps discrets de taille \(\Delta t\).
+
+A partir de la définition de dérivée (en supprimant tout simplement la
+limite), nous savons que:
+
+\[\frac{\partial u}{\partial x} \simeq \frac{u(x+\Delta x) - u(x)}{\Delta x} \]
+
+Notre équation discrète, alors, est:
+
+\[\frac{u_i^{n+1} - u_i^{n}}{\Delta t} + c \frac{u_i^{n+1} - u_{i-1}^{n}}{\Delta x} = 0\]
+
+Où \(n\) et \(n + 1\) sont deux étapes consécutives dans le temps,
+tandis que \(i-1\) et \(i\) sont deux points voisins de la coordonnée
+discrétisée \(x\). Si on donne les conditions initiales, la seule
+inconnue dans cette discrétisation est \(u_i^{n+1}\). Nous pouvons
+résoudre pour notre inconnue pour obtenir une équation qui nous permet
+d'avancer dans le temps, comme suit:
+
+\[u_i^{n+1} = u_i^{n} - c \frac{\Delta t}{\Delta x}(u_i^{n} - u_{i-1}^n)\]
+
+    \subsubsection{Écrire un script qui effectue les calculs et les actions
+suivantes
+:}\label{uxe9crire-un-script-qui-effectue-les-calculs-et-les-actions-suivantes}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Il définit une grille unidimensionnelle de \(N=81\) points
+  régulièrement espacés dans un domaine spatial qui fait \(2\) mètres de
+  longueur, c'est-à-dire \(x \in [0,2] \, m\). Il définit ainsi la
+  variable \(\Delta x\) comme la distance entre deux points adjacents de
+  la grille.
+\item
+  Il met en place les conditions initiales suivantes. La condition
+  initiale \(u_0\) a la valeur \(u = 2\) (en unités arbitraires, dans la
+  suite \(u.a.\)) dans l'intervalle \(0.5 \ m ≤ x ≤ 1 \ m\) et
+  \(u = 1 \ (u.a.)\) partout ailleurs dans \([0,2] \, m\) (c'est-à-dire
+  une fonction chapeau).
+\item
+  Il trace un graphique de la condition initiale.
+\item
+  Il définit une fonction pour calculer \(u\) au pas de temps futur
+  (\(n+1\)) à partir de la valeur de \(u\) au pas de temps présent
+  (\(n\)). La valeur affectée à la variable pas de temps sera
+  \(\Delta t = 0.25 \ s\), et on posera la valueur \(c = 1 \ m /s\) pour
+  la vitesse de la perturbation dans le milieu.
+\item
+  Il trace sur le même graphique que celui utilisé pour la condition
+  initiale (mais avec une autre couleur) la fonction \(u\) au temps
+  \(t=6.25\ s\).
+\end{enumerate}
+
+    \subsubsection{Quelques operations utiles sur les arrays de
+\(numpy\)}\label{quelques-operations-utiles-sur-les-arrays-de-numpy}
+
+    Le fonctionnement de la fonction \(ones()\) est analogue à celui de la
+fonction \(zeros()\) qu'on a déjà rencontré, voir l'exemple suivant:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}      \PY{c}{\PYZsh{} fonction ones() pour un array de 10 éléments}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.])
+\end{Verbatim}
+        
+    Il est possible de faire des cycles implicites sur les arrays de
+\(numpy\), comme dans l'exemple suivant. Cette opération permet de
+manipuler toute une partie d'un array en même temps, sans devoir
+recourir à une boucle explicite (de type \(for\) ou \(while\)).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}
+         \PY{n}{b} \PY{o}{=} \PY{n}{a}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{]}
+         \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{b = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a = 
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+b = 
+[3, 4, 5, 6, 7]
+
+    \end{Verbatim}
+
+    Pour copier les éléments d'un arrays dans un autre array, il est
+possible de travailler comme dans les exemples suivants.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{n}{a}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{a = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         
+         \PY{n}{b}\PY{o}{=}\PY{n}{a}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}      \PY{c}{\PYZsh{} première méthode}
+         \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{b = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+         
+         \PY{n}{c}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{a}\PY{p}{)}   \PY{c}{\PYZsh{} seconde méthode}
+         \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{c = }\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a = 
+[1 2 3 4 5]
+b = 
+[1 2 3 4 5]
+c = 
+[1 2 3 4 5]
+
+    \end{Verbatim}
+
+    \subsection{Script 4 (Bonus): Moments d'inertie d'une plaque
+d'aluminium}\label{script-4-bonus-moments-dinertie-dune-plaque-daluminium}
+
+    La matrice d'inertie d'un solide \(S\), au point \(O\) dans la base de
+coordonnées \((\vec{x},\vec{y},\vec{z})\), s'écrit :
+
+    \[[I_0(S)]  = \left( \begin{array}{ccc}  
+I_{Ox} & -I_{Oxy} & -I_{Ozx} \\
+  -I_{Oxy}     &  I_{Oy} & -I_{Oyz} \\
+ -I_{Ozx}      & -I_{Oyz} & I_{Oz}  \\
+\end{array} \right)_{(\vec{x},\vec{y},\vec{z})} \]
+
+    avec \(I_{Ox}\) , \(I_{Oy}\) et \(I_{Oz}\), moments d'inertie par
+rapport aux axes du repère \((\vec{x},\vec{y},\vec{z})\):
+
+    \[I_{Ox} = \int_{P\in S} (y^2+z^2)\ dm\]
+
+\[I_{Oy} = \int_{P\in S} (z^2+x^2)\ dm\]
+
+\[I_{Oz} = \int_{P\in S} (x^2+y^2)\ dm\]
+
+    et \(I_{Oxy}\) , \(I_{Oyz}\) et \(I_{Oyz}\) les produits d'inertie par
+rapport aux axes du même repère :
+
+    \[I_{Oyz} = \int_{P\in S} yz \ dm\]
+
+\[I_{Ozx} = \int_{P\in S} zx \ dm\]
+
+\[I_{Oxy} = \int_{P\in S} xy \ dm\]
+
+    Le symbole \(dm\) dans les intégrales ci-dessus représente un élément
+infinentesimal de masse du solide et le domaine de l'intégration est
+pris sur tous les points \(P\) du solide \(S\).
+
+    Dans ce script, nous souhaitons calculer la matrice d'inertie
+\(I_{O}(S)\) pour une plaque rectangulaire homogène en aluminium.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP3-2016_files/Python-TP3-2016_43_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    La plaque, voir aussi la figure ci-dessus, mesure \(5\ m\) de longueur
+(direction y), \(2\ m\) de largeur (direction x) et juste un \(1 \ cm\)
+d'épaisseur (direction z). La densité massique de l'aluminium est
+\(\rho_{Al} = 2.7 \ g / cm^{3}\). A partir de ces données on peut
+calculer la densité massique surfacique de la plaque ainsi que sa masse
+totale.
+
+Le script doit être composé par des fonctions, qui effectuent le calcul
+des intégrales de façon numérique (c'est-à-dire en effectuant des
+sommations). La valeur de la précision (\(\Delta\), mesurée en mètres),
+indiquant le niveau de discrétisation spatiale dans les intégrales,
+devra être introduite par l'utilisateur au début du script.
+
+Suggestions : 1) étant donné le faible épaisseur de la plaque on peut
+négliger la coordonnée \(z\) dans le calcul des integrales. 2) Pour une
+convergence rapide des calculs, choisir \(\Delta > 1\ mm\).
+
+    \subsubsection{Multiplication élément par élément des tableaux
+numpy}\label{multiplication-uxe9luxe9ment-par-uxe9luxe9ment-des-tableaux-numpy}
+
+    Il y a deux manières de multiplier élément par élément les arrays
+\(numpy\): soit avec le simple operateur \(*\) soit avec la fonction
+\(np.multiply\). Cette deuxième possibilté offre plus de flexibilité.
+Regardez les exemples ci-dessous:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{n}{x}   \PY{c}{\PYZsh{} en utilisant le symbole de multiplication}
+         \PY{k}{print}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{x}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{]}   \PY{c}{\PYZsh{} en utilisant la fonction de multiplication }
+         \PY{k}{print}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+         
+         \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{x}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}  \PY{c}{\PYZsh{} choisir uniquement les éléments entre 3 et 5 }
+         \PY{k}{print}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+         
+         \PY{n}{h} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{x}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{c}{\PYZsh{} choisir uniquement les éléments paires du tableau  }
+         \PY{k}{print}\PY{p}{(}\PY{n}{h}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.   0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1. ]
+[ 0.    0.01  0.04  0.09  0.16  0.25  0.36  0.49  0.64  0.81  1.  ]
+[ 0.    0.01  0.04  0.09  0.16  0.25  0.36  0.49  0.64  0.81  1.  ]
+[ 0.09  0.16  0.25]
+[ 0.01  0.09  0.25  0.49  0.81]
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
