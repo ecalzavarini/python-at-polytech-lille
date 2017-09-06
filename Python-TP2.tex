@@ -1,0 +1,831 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Python-TP2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+\date{}
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subparagraph{TP 2 -- Informatique CM3 --}\label{tp-2-informatique-cm3}
+
+    \section{Python @ Polytech'Lille}\label{python-polytechlille}
+
+    Le texte de cette session de travaux pratiques est également disponible
+ici:
+
+https://github.com/ecalzavarini/python-at-polytech-lille/blob/master/Python-TP2.ipynb
+
+    \subsubsection{Modalités pour accomplir le TP et compte
+rendu}\label{modalituxe9s-pour-accomplir-le-tp-et-compte-rendu}
+
+    Nous vous rappelons que les modalités pour accomplir ce TP sont les
+mêmes de la première séance :
+
+    Vous aurez à écrire plusieurs scripts (script1.py , script2.py ,
+\ldots{}). Les scripts doivent être accompagnés par un document
+descriptif unique (README.txt). Dans ce fichier, vous devrez décrire le
+mode de fonctionnement des scripts et, si besoin, mettre vos
+commentaires. Merci d'y écrire aussi vos noms et prenoms complets. Tous
+les fichiers doivent être mis dans un dossier appelé TP2-nom1-nom2 et
+ensuite être compressés dans un fichier archive TP2-nom1-nom2.tgz .
+
+Enfin vous allez envoyer ce fichier par email à l'enseignant: soit
+Enrico (enrico.calzavarini@polytech-lille.fr) soit Stefano
+(stefano.berti@polytech-lille.fr).
+
+    \paragraph{Vous avez une semaine de temps pour compléter le TP,
+c'est-à-dire que la date limite pour envoyer vos travaux c'est dans 7
+jours à partir
+d'aujourd'hui.}\label{vous-avez-une-semaine-de-temps-pour-compluxe9ter-le-tp-cest-uxe0-dire-que-la-date-limite-pour-envoyer-vos-travaux-cest-dans-7-jours-uxe0-partir-daujourdhui.}
+
+    \subsubsection{Gestion des accents en
+Python}\label{gestion-des-accents-en-python}
+
+    Dans la première séance de TP, vous avez souvent rencontré un message
+d'erreur issu de l'utilisation des caractères accentués dans les scripts
+en Python. Voici une solution à ce problème. En première ligne d'un
+script, il faut insérer la ligne :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c}{\PYZsh{} \PYZhy{}*\PYZhy{} coding: utf\PYZhy{}8 \PYZhy{}*\PYZhy{}}
+\end{Verbatim}
+
+    ou bien
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c}{\PYZsh{} \PYZhy{}*\PYZhy{} coding: latin\PYZhy{}1 \PYZhy{}*\PYZhy{}}
+\end{Verbatim}
+
+    Il s'agit d'un pseudo-commentaire indiquant à Python le système de
+codage utilisé, ici l'utf-8 (ou le latin-1) qui comprend les caractères
+spéciaux comme les caractères accentués, les apostrophes, les cédilles ,
+etc .
+
+    \subsubsection{Utiliser les fonctions en
+Python}\label{utiliser-les-fonctions-en-python}
+
+    Vous savez déjà ce qu'est une fonction mathématique d'une variable
+réelle. Considérons par exemple la fonction f(x) suivante :
+
+f : x ---\textgreater{} 2 x + 1
+
+pour la définir en Python :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZsh{}definition d\PYZsq{}une fonction}
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{x} \PY{o}{+} \PY{l+m+mi}{1}
+        
+        \PY{c}{\PYZsh{}utilisation de la fonction}
+        
+        \PY{k}{print}\PY{p}{(}\PY{n}{f}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+9
+    \end{Verbatim}
+
+    Avez-vous remarqué qu'à la deuxième ligne, on n'a pas commencé à écrire
+au début de la ligne? De la même façon que pour les structures de
+contrôle `if' ou `for', nous devons appliquer la règle d'indentation.
+Cette indentation est indispensable pour que l'interpréteur Python
+comprenne la fin d'un bloc de définition d'une fonction.
+
+    Le principe de définition de fonctions est intéressant pour deux raisons
+:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  cela nous permet de ne pas répéter un calcul long à taper,
+\item
+  Python possède un type spécial dédié au fonctions, que l'on peut donc
+  manipuler, mettre dans des listes pour les étudier les unes à la suite
+  des autres.
+\end{enumerate}
+
+Par exemple :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{print}\PY{p}{(} \PY{n}{f}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)} \PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)} \PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)} \PY{p}{,} \PY{n}{f}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(3, 5, 7, 9, 11, 13)
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{print}\PY{p}{(} \PY{n+nb}{type}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<type 'function'>
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} definition d\PYZsq{}une seconde fonction}
+        \PY{k}{def} \PY{n+nf}{hi}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{hello }\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n}{name} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{ from Python!!!}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{}exemple d\PYZsq{}utilisation    }
+        \PY{n}{hi}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Mark}\PY{l+s}{\PYZdq{}}\PY{p}{)}    
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hello Mark from Python!!!
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{}definition  d\PYZsq{}une trosieme fonction}
+        \PY{k+kn}{from} \PY{n+nn}{random} \PY{k+kn}{import} \PY{n}{choice}
+        \PY{k}{def} \PY{n+nf}{lettre}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{choice}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{abcdefghijklmnopqrstuvwxyz}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{}exemple d\PYZsq{}utilisation }
+        \PY{n}{lettre}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 'm'
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c}{\PYZsh{}definition d\PYZsq{}une liste de fonctions}
+        \PY{n}{mes\PYZus{}fonctions} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{,}\PY{n}{hi}\PY{p}{,}\PY{n}{lettre}\PY{p}{]}
+        
+        \PY{c}{\PYZsh{}utilisation}
+        \PY{n}{mes\PYZus{}fonctions}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Dominique}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{mes\PYZus{}fonctions}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hello Dominique from Python!!!
+    \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 'g'
+\end{Verbatim}
+        
+    \subsection{Script 1 : calcul des forces sur un ballon de
+football}\label{script-1-calcul-des-forces-sur-un-ballon-de-football}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+        \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kick.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}9}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2_files/Python-TP2_24_0.jpg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Les forces sur un ballon de football en vol suite à un coup de pied d'un
+joueur sont deux: la force de la pesanteur (le poids \(F_P\)) et la
+force de traînée exercée par le frottement de l'air sur le ballon
+(\(F_T\)). Leurs expressions sont les suivantes :
+
+    \[F_P = M\ g\]
+
+\[F_T = 0.5 \ C_D \ \rho \ u^2\ S \]
+
+    Où \(M\) est la masse du ballon, \(g\) l'accélération de gravité,
+\(C_D\) le coefficient de traînée, \(\rho\) la masse volumique de l'air,
+\(u\) la vitesse du ballon et enfin \(S\) la section du ballon
+\(S=\pi\ R^2\) (avec R le rayon).
+
+    Nous demandons d'écrire un script qui tout d'abord demande à
+l'utilisateur d'entrer les valeurs du rayon du ballon (en mètres), de la
+masse du ballon (en kg) et de la vitesse du ballon ainsi que l'unité de
+mesure pour cette dernière (soit ``m/s'' ou ``km/h''). Ensuite le script
+devra calculer les forces \(F_P\) et \(F_T\), afficher les deux valeurs
+ainsi que leur rapport \(F_T/F_P\).
+
+    On demande de faire tout cela à l'aide de quatre fonctions :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  une fonction qui convertit la vitesse de ``km/h'' en ``m/s'' si besoin
+\item
+  une fonction qui calcule la surface \(S\) du ballon à partir du rayon
+  \(R\)
+\item
+  une fonction qui calcule \(F_T\)
+\item
+  une fonction qui calcule \(F_P\)
+\end{enumerate}
+
+    Les données du problème sont l'accélération de gravité
+\(g=9.81 \, m /s^2\), la masse volumique de l'air
+\(\rho = 1.2 \, kg/m^{-3}\), le coefficient de trainée \(C_D=0.2\).
+Tourner le script plusieurs fois et dire ce qui change dans le rapport
+\(F_T/F_P\) pour des valeurs de vitesse croissantes (p.ex.
+\(u=10 \, km/h\), \(u=120 \, km/h\)) et à masse et rayon fixes.
+
+    \subsection{Script 2 : étude de la fonction de transfert du système
+ressort - amortisseur (suspension) d'un
+automobile}\label{script-2-uxe9tude-de-la-fonction-de-transfert-du-systuxe8me-ressort---amortisseur-suspension-dun-automobile}
+
+    L'objet de ce script est d'illustrer à l'aide de Python les rôles
+respectifs joués par le ressort et l'amortisseur d'un système
+automobile. Pour ce faire, nous étudions un ressort couplé à un
+amortisseur en parallèle.
+
+Comme dans la figure ci-dessous:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+         \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{masse\PYZhy{}ressort\PYZhy{}amortisseur.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}10}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2_files/Python-TP2_33_0.jpg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    L'équation vérifiée par le système est la suivante :
+
+\[ \ddot{x} + \frac{\omega_0}{Q} \dot{x} + \omega_0^2\ x = \frac{F}{m} \cos( \omega t) \]
+
+    Ici \(m\) est la masse de la roue, \(F\) et \(\omega\) sont
+respectivement l'intensité de la force appliquée (qui modélise l'effet
+des ondulations du sol sur la roue) et sa pulsation , \(\omega_0\) la
+pulsation caractéristique du ressort (\(\omega_0=\sqrt{k/m}\)) et enfin
+\(Q\) est un coefficient appelé coefficient de qualité. Ici on négligera
+le poids de la roue.
+
+Un système très amorti a un \(Q\) faible. À l'inverse, un \(Q\) élevé
+correspond à un système peu amorti. Pour fixer les idées, le \(Q\) d'une
+voiture avec des amortisseurs en bon état est légèrement supérieur à 1.
+
+    De la solution de l'équation du système ressort-amortisseur on trouve la
+fonction de transfert qui décrit la réponse du système en fonction de la
+pulsation \(\omega\).
+
+En particulier la fonction de transfert (le module de cette fonction
+pour la précision) s'écrit :
+
+    \[ T(\omega) = \frac{F}{m \ \omega_0^2} \frac{1}{\sqrt{ \left( 1 - \omega^2/\omega_0^2 \right)^2 +  Q^{-2} \ \omega^2/\omega_0^2 }} \]
+
+    ou en utilisant la pulsation adimensionnée u = ω/ω0 :
+
+    \[ T(u) = \frac{F}{m \ \omega_0^2} \frac{1}{\sqrt{ \left( 1 - u^2 \right)^2 +  u^{2}/ \      Q^2}} \]
+
+    Nous demandons d'écrire un script qui trace un graphique du module de la
+fonction de transfert \(T(u)\) en fonction de la pulsation adimensionnée
+\(u\) (dans l'intervalle \([0,2]\)) pour toutes les valeurs de \(Q\)
+dans l'intervalle \([0,10]\) avec rapport entre une valeur de \(Q\) et
+la valeur précédente de \(\delta Q = 2.0\) (facteur de redoublement).
+
+    Prendre la valeur suivante pour l'amplitude de la fonction de transfert
+\[ \frac{F}{m \omega_0^2} = 2 \]
+
+    \subparagraph{Ça pourrait être utile
+:}\label{uxe7a-pourrait-uxeatre-utile}
+
+    \paragraph{La boucle while}\label{la-boucle-while}
+
+    Le but de la boucle ``while'' est de répéter certaines instructions tant
+qu'une condition est respectée. On n'est pas donc obligé de savoir au
+départ le nombre de répétitions à faire.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{nb\PYZus{}repetitions} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{nb\PYZus{}repetitions} \PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Et }\PY{l+s}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{l+s}{\PYZdq{}}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}
+             \PY{n}{i} \PY{o}{=} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Zéro!}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Et 1!
+Et 2!
+Et 3!
+Zéro!
+    \end{Verbatim}
+
+    L'instruction ``break'' sert, non pas à interrompre le programme, mais à
+sortir de la boucle.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{nb\PYZus{}repetitions} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{nb\PYZus{}repetitions} \PY{p}{:}
+             \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Et }\PY{l+s}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{l+s}{\PYZdq{}}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}
+             \PY{n}{i} \PY{o}{=} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n}{i}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{:} 
+                 \PY{k}{break}
+         \PY{k}{print} \PY{l+s}{\PYZdq{}}\PY{l+s}{Zéro!}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Et 1!
+Et 2!
+Zéro!
+    \end{Verbatim}
+
+    \paragraph{Création d'une légende sur un
+graphique}\label{cruxe9ation-dune-luxe9gende-sur-un-graphique}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline}  
+         
+         \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{o}{*}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         
+         \PY{c}{\PYZsh{} Création d\PYZsq{}une array numpy : Temps = Abscisses }
+         \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{)}    
+         
+         \PY{c}{\PYZsh{} Fonction U dépendant d\PYZsq{}un paramètre Q}
+         \PY{k}{def} \PY{n+nf}{U}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{Q}\PY{o}{*}\PY{n}{t}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pi}\PY{o}{*}\PY{n}{t}\PY{p}{)}  
+         
+         \PY{c}{\PYZsh{} Plot1 avec Q = 2 et édition du label correspondant}
+         \PY{n}{Q}\PY{o}{=}\PY{l+m+mf}{2.0}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{U}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Q=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Q}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{c}{\PYZsh{} Plot2 avec Q = 10 et édition du label correspondant}
+         \PY{n}{Q}\PY{o}{=}\PY{l+m+mf}{10.0}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{U}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Q=}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Q}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{c}{\PYZsh{} Appel de la légende}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper right}\PY{l+s}{\PYZsq{}}\PY{p}{)}    
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2_files/Python-TP2_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Script 3 : Calcul de la valeur critique du coefficient de
+qualité d'une
+suspension}\label{script-3-calcul-de-la-valeur-critique-du-coefficient-de-qualituxe9-dune-suspension}
+
+    Écrire un script qui calcule la valeur critique de \(Q\), c'est-à-dire
+la valeur pour laquelle on observe une transition entre le régime de
+vibrations sur-amorties (\(T(u)\) non croissante) et celui de résonance
+(\(T(u)\) non monotone, avec un maximum pour \(0< u < 1\)).
+
+    Pour cela faire, on peut par exemple calculer la valeur maximale
+\(T_{max}\) de \(T(u)\) pour des valeurs croissantes de \(Q\), et
+arrêter le calcul lorsque \(T_{max}\) est supérieur à
+\(F / (m \omega_0^2)\).
+
+Dans ce cas on vous suggère de prendre \(Q=0.5\) comme valeur de départ
+et de l'incrémenter pas à pas d'une valeur \(\delta Q = 10^{-6}\).
+
+    Utiliser encore : \(F /(m \omega_0^2) = 2\)
+
+    \subsubsection{Calcul de la valeur maximale avec
+numpy}\label{calcul-de-la-valeur-maximale-avec-numpy}
+
+    Pour ce script, il peut être utile d'utiliser la fonction numpy pour
+calculer le maximum d'une liste :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:}  \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+          
+          \PY{n}{val}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}
+          
+          \PY{n}{val\PYZus{}max} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{val}\PY{p}{)}
+             
+          \PY{k}{print}\PY{p}{(}\PY{n}{val\PYZus{}max}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+7.0
+    \end{Verbatim}
+
+    \subsection{Script 4 : Préparation des données d'entrée pour une
+machine-outil à contrôle
+numérique}\label{script-4-pruxe9paration-des-donnuxe9es-dentruxe9e-pour-une-machine-outil-uxe0-contruxf4le-numuxe9rique}
+
+    Les machines-outil d'usinage à contrôle numérique peuvent être
+contrôlées à travers un fichier de données d'entrée. Ce fichier contient
+toutes les spécifications géométriques de l'objet à usiner et il a
+souvent la forme d'une matrice en deux dimensions, dans laquelle chaque
+élément identifie une coordonnée spatiale (x, y) alors que la valeur de
+l'élément contient l'information sur l'usinage (par exemple dans une
+fraiseuse ``\(0\)'' signifie couper et ``\(1\)'' signifie garder tel
+qu'il est).
+
+Nous considérons ici une machine-outil fraiseuse avec résolution du
+dixième de millimètre, et une surface de travail de
+\((10 \times 10) cm^2\). Nous voulons découper de la pièce brute une
+bielle à partir d'un bloc de métal de dimensions \((10 \times 10) cm^2\)
+(l'épaisseur du bloc n'a pas d' importance ici).
+
+La géométrie de la bielle est montrée dans la figure ci-dessous :
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
+         \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bielle.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}15}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2_files/Python-TP2_59_0.jpg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Détails de la géométrie de la bielle:
+
+\begin{itemize}
+\item
+  le grand anneau a rayon interne \(r_1 = 10.0\ mm\), rayon externe
+  \(r_2 = 16.0\ mm\) , position du centre \(x_1 = 50.0 \ mm\) ,
+  \(y_1 = 20.0 \ mm\).
+\item
+  le petit anneau a rayon interne \(r_3 = 3.0\ mm\) , rayon externe
+  \(r_4 = 11.2\ mm\) , position du centre \(x_2 = 50.0 \ mm\) ,
+  \(y_2 = 75.0 \ mm\).
+\item
+  la barre de liaison a longueur \(l=30.0\ mm\) , hauteur
+  \(h = 10.0\ mm\) et centre géométrique en \(x_3 = 50.0 \ mm\),
+  \(y_3 = 50.0 \ mm\).
+\end{itemize}
+
+    On demande d'écrire un script qui crée la matrice pour usiner la bielle
+en figure.
+
+Cette matrice devra avoir \(1000\) x \(1000\) éléments, chaque élément
+correspondant à \((0.1 \times 0.1) mm^2\), et la valeur des éléments
+doit être soit \(0\) si le matériau doit être enlevé (ou bien
+complètement fraisé dans ce cas) soit \(1\) s'il doit être gardé comme
+il est.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Montrer à travers un graphique la matrice que vous avez obtenu
+\item
+  Tracer aussi un graphique de la section longitudinale centrale de la
+  bielle.
+\end{enumerate}
+
+    \subparagraph{Cela pourrait vous être utile
+:}\label{cela-pourrait-vous-uxeatre-utile}
+
+    \paragraph{Créer et manipuler un tableau multidimensionnel avec
+numpy}\label{cruxe9er-et-manipuler-un-tableau-multidimensionnel-avec-numpy}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{c}{\PYZsh{}définition d\PYZsq{}une matrice avec numpy}
+         \PY{n}{tableau} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array} \PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{p}{,}\PY{l+m+mi}{1} \PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{44} \PY{p}{,}\PY{l+m+mi}{55} \PY{p}{,}\PY{l+m+mi}{56}\PY{p}{]}\PY{p}{]}\PY{p}{)} 
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{tableau}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0  1  2]
+ [ 1  2  3]
+ [ 4  6 12]
+ [44 55 56]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c}{\PYZsh{} copier un element du tableau, tableau[num. ligne][num. colonne]}
+         \PY{n}{n}\PY{o}{=}\PY{n}{tableau}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} 
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{n}\PY{p}{)} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+44
+    \end{Verbatim}
+
+    Noter que l'indice de gauche indique toujours le nombre de la ligne
+tandis que l'indice de droite indique le numéro de la colonne.
+
+Ce système d'indexage (dite convention ``row-major order'' ou ``ligne
+par ligne'') n'est pas toujours intuitif : dans le cas d'une matrice
+\(A[i, j]\) qui contient des informations spatiales l'indice à gauche (
+\(i\) ) identifie la coordonnée verticale \(y\) et l'indice de droite (
+\(j\) ) identifie la coordonnée horizontale \(x\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{c}\PY{o}{=}\PY{n}{tableau}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{c}{\PYZsh{} copier une colonne du tableau}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0  1  4 44]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{d}\PY{o}{=}\PY{n}{tableau}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{c}{\PYZsh{} copier une colonne du tableau}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0 1]
+ [1 2]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{tableau} \PY{o}{=} \PY{n}{tableau} \PY{o}{+} \PY{l+m+mi}{2}  \PY{c}{\PYZsh{}ajouter 2 aux éléments du tableau}
+         \PY{k}{print}\PY{p}{(}\PY{n}{tableau}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 2  3  4]
+ [ 3  4  5]
+ [ 6  8 14]
+ [46 57 58]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{tableau2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}  \PY{c}{\PYZsh{}définition d\PYZsq{}une matrice composée de zéros}
+         
+         \PY{k}{print}\PY{p}{(}\PY{n}{tableau2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]
+ [ 0.  0.  0.]]
+    \end{Verbatim}
+
+    \paragraph{Représenter graphiquement une
+matrice}\label{repruxe9senter-graphiquement-une-matrice}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         
+         \PY{c}{\PYZsh{}création d\PYZsq{}une matrice aléatoire de 80x50 elements}
+         \PY{n}{my\PYZus{}mat} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{c}{\PYZsh{} représentation graphique}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{matshow}\PY{p}{(}\PY{n}{my\PYZus{}mat}\PY{p}{)} 
+         
+         \PY{c}{\PYZsh{} définition des marqueurs en x}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} 
+         \PY{c}{\PYZsh{} définition des marqueurs en y}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} 
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}        
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2_files/Python-TP2_72_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c}{\PYZsh{} représentation graphique en blanc et noir}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{matshow}\PY{p}{(}\PY{n}{my\PYZus{}mat}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Greys}\PY{l+s}{\PYZsq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}        
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP2_files/Python-TP2_73_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
