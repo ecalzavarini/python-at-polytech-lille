@@ -14,13 +14,42 @@
 
     
     
-    \usepackage{graphicx} % Used to insert images
+    \usepackage[T1]{fontenc}
+    % Nicer default font than Computer Modern for most use cases
+    \usepackage{palatino}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
     \usepackage{adjustbox} % Used to constrain images to a maximum size 
-    \usepackage{color} % Allow colors to be defined
+    \usepackage{xcolor} % Allow colors to be defined
     \usepackage{enumerate} % Needed for markdown enumerations to work
     \usepackage{geometry} % Used to adjust the document margins
     \usepackage{amsmath} % Equations
     \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
     \usepackage{eurosym} % defines \euro
     \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
     \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
@@ -33,37 +62,35 @@
     \usepackage{hyperref}
     \usepackage{longtable} % longtable support required by pandoc >1.10
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
     
 
     
     
-    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
-    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
-    \definecolor{darkgreen}{rgb}{.12,.54,.11}
-    \definecolor{myteal}{rgb}{.26, .44, .56}
-    \definecolor{gray}{gray}{0.45}
-    \definecolor{lightgray}{gray}{.95}
-    \definecolor{mediumgray}{gray}{.8}
-    \definecolor{inputbackground}{rgb}{.95, .95, .85}
-    \definecolor{outputbackground}{rgb}{.95, .95, .95}
-    \definecolor{traceback}{rgb}{1, .95, .95}
-    % ansi colors
-    \definecolor{red}{rgb}{.6,0,0}
-    \definecolor{green}{rgb}{0,.65,0}
-    \definecolor{brown}{rgb}{0.6,0.6,0}
-    \definecolor{blue}{rgb}{0,.145,.698}
-    \definecolor{purple}{rgb}{.698,.145,.698}
-    \definecolor{cyan}{rgb}{0,.698,.698}
-    \definecolor{lightgray}{gray}{0.5}
-    
-    % bright ansi colors
-    \definecolor{darkgray}{gray}{0.25}
-    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
-    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
-    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
-    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
-    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
-    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
     % commands and environments needed by pandoc snippets
     % extracted from the output of `pandoc -s`
     \providecommand{\tightlist}{%
@@ -85,6 +112,26 @@
     \newcommand{\RegionMarkerTok}[1]{{#1}}
     \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
     \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
     
     % Define a nice break command that doesn't care if a line doesn't already
     % exist.
@@ -144,7 +191,6 @@
 \expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
-\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
 \expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
 \expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
@@ -154,7 +200,7 @@
 \expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
 \expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
 \expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
-\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
 \expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
 \expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
 \expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
@@ -208,19 +254,19 @@
     \hypersetup{
       breaklinks=true,  % so long urls are correctly broken across lines
       colorlinks=true,
-      urlcolor=blue,
-      linkcolor=darkorange,
-      citecolor=darkgreen,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
       }
     % Slightly bigger margins than the latex defaults
     
     \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
     
     
-\date{}
+
     \begin{document}
     
-    
+    \date{}
     \maketitle
     
     
@@ -290,7 +336,7 @@ dimensions}\label{tracer-le-graphique-dun-champ-vectoriel-en-deux-dimensions}
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP3_files/Python-TP3_7_0.png}
+    \adjustimage{max size={0.8\linewidth}{0.8\paperheight}}{Python-TP3_files/Python-TP3_7_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -334,7 +380,7 @@ Ici on utilisera les paramètres suivants: \[
 \setcounter{enumi}{1}
 \item
   Il calcule la matrice gradient de déformation:
-  \[ \nabla u =  \left( \begin{array}{cc}
+  \[ \nabla {\bf u} =  \left( \begin{array}{cc}
   \partial_x u_x & \partial_y u_x  \\
   \partial_x u_y & \partial_y u_y \end{array} \right). \]
 \item
@@ -342,21 +388,22 @@ Ici on utilisera les paramètres suivants: \[
   sa partie antisymétrique (\(A\)) :
 \end{enumerate}
 
-\[ S = \frac{1}{2}\left(\nabla u  + (\nabla u )^T \right) \]
+\[ S = \frac{1}{2}\left(\nabla {\bf u}  + (\nabla {\bf u} )^T \right) \]
 
-\[ A = \frac{1}{2}\left(\nabla u  - (\nabla u )^T \right). \]
+\[ A = \frac{1}{2}\left(\nabla {\bf u}  - (\nabla {\bf u} )^T \right). \]
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
 \setcounter{enumi}{3}
 \item
   Il calcule le champ de déformation correspondant à \(S\) et \(A\),
-  appellés respectivement \(u_S\) et \(u_A\).
+  appellés respectivement \({\bf u}_S\) et \({\bf u}_A\).
 \item
   Il trace les graphiques de deux nouveaux champs de déformation,
-  \(u_S\) et \(u_A\).
+  \({\bf u}_S\) et \({\bf u}_A\).
 \item
-  Enfin, il trace le graphique de la somme de \(u_S\) et \(u_A\).
+  Enfin, il trace le graphique de la somme de \({\bf u}_S\) et
+  \({\bf u}_A\).
 \end{enumerate}
 
 Qu'apprenons-nous des ces quatre graphiques ?
@@ -389,6 +436,7 @@ a =
 at = 
 [[1 3]
  [2 4]]
+
     \end{Verbatim}
 
     \subsection{Script 2 : Transport du vecteur
@@ -477,6 +525,8 @@ points et les composantes des vecteurs) plusieurs fois, il pourrait être
 pratique de définir aussi une fonction pour la lecture de ce type de
 données.
 
+\vspace{1cm}
+
     \subsection{Script 3 : Propagation d'une
 perturbation}\label{script-3-propagation-dune-perturbation}
 
@@ -509,7 +559,7 @@ limite), nous savons que:
 
 Notre équation discrète, alors, est:
 
-\[\frac{u_i^{n+1} - u_i^{n}}{\Delta t} + c \frac{u_i^{n+1} - u_{i-1}^{n}}{\Delta x} = 0\]
+\[\frac{u_i^{n+1} - u_i^{n}}{\Delta t} + c \frac{u_i^{n} - u_{i-1}^{n}}{\Delta x} = 0\]
 
 Où \(n\) et \(n + 1\) sont deux étapes consécutives dans le temps,
 tandis que \(i-1\) et \(i\) sont deux points voisins de la coordonnée
@@ -544,12 +594,12 @@ suivantes
   Il définit une fonction pour calculer \(u\) au pas de temps futur
   (\(n+1\)) à partir de la valeur de \(u\) au pas de temps présent
   (\(n\)). La valeur affectée à la variable pas de temps sera
-  \(\Delta t = 0.25 \ s\), et on posera la valueur \(c = 1 \ m /s\) pour
-  la vitesse de la perturbation dans le milieu.
+  \(\Delta t = 0.025 \ s\), et on posera la valueur \(c = 1 \ m /s\)
+  pour la vitesse de la perturbation dans le milieu.
 \item
   Il trace sur le même graphique que celui utilisé pour la condition
   initiale (mais avec une autre couleur) la fonction \(u\) au temps
-  \(t=6.25\ s\).
+  \(t=0.625\ s\).
 \end{enumerate}
 
     \subsubsection{Quelques operations utiles sur les arrays de
@@ -590,6 +640,7 @@ a =
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 b = 
 [3, 4, 5, 6, 7]
+
     \end{Verbatim}
 
     Pour copier les éléments d'un arrays dans un autre array, il est
@@ -618,6 +669,7 @@ b =
 [1 2 3 4 5]
 c = 
 [1 2 3 4 5]
+
     \end{Verbatim}
 
     \subsection{Script 4 (Bonus): Moments d'inertie d'une plaque
@@ -657,14 +709,8 @@ pris sur tous les points \(P\) du solide \(S\).
     Dans ce script, nous souhaitons calculer la matrice d'inertie
 \(I_{O}(S)\) pour une plaque rectangulaire homogène en aluminium.
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{Image}
-         \PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{fig\PYZus{}plaque.jpg}\PY{l+s}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-\texttt{\color{outcolor}Out[{\color{outcolor}12}]:}
-    
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP3_files/Python-TP3_43_0.jpg}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Python-TP3_files/Python-TP3_43_0.jpeg}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -717,6 +763,7 @@ Regardez les exemples ci-dessous:
 [ 0.    0.01  0.04  0.09  0.16  0.25  0.36  0.49  0.64  0.81  1.  ]
 [ 0.09  0.16  0.25]
 [ 0.01  0.09  0.25  0.49  0.81]
+
     \end{Verbatim}
 
 
