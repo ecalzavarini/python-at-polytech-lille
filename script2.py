@@ -2,17 +2,17 @@
 
 print("Conversion of pressure measurements")
 
-unit_in = input("Please insert pressure units, choosing among ['pa','bar','atm','psi'] ")
+unit_in = input("Please insert pressure units, choosing among [ pa, bar , atm , psi , torr ] ")
 print("chosen unit is %s" % unit_in )
 
 val_in = input("Please insert pressure value =  ")
+val_in = float(val_in)
 print("given value is " + str(val_in) + " " + str(unit_in) )
 
 
-unit_out = input("Please insert pressure output units, choosing among ['pa','bar','atm','psi','torr'] ")
+unit_out = input("Please insert pressure output units, choosing among [ pa , bar , atm , psi , torr ] ")
 print("chosen output unit is %s" % unit_out )
 
-val_in = float(val_in)
 
 # first we convert the in value to Pascal
 if unit_in == 'psi' :
